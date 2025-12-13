@@ -217,6 +217,24 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.library</groupId>
+                <artifactId>ls-library</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.library</groupId>
+                <artifactId>ls-business</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.library</groupId>
+                <artifactId>ls-mapper</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -227,6 +245,9 @@
         <module>ls-quartz</module>
         <module>ls-generator</module>
         <module>ls-common</module>
+        <module>ls-mapper</module>
+        <module>ls-business</module>
+        <module>ls-library</module>
     </modules>
     <packaging>pom</packaging>
 
