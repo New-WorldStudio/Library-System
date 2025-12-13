@@ -34,6 +34,7 @@
         <logback.version>1.2.13</logback.version>
         <spring-security.version>5.7.12</spring-security.version>
         <spring-framework.version>5.3.39</spring-framework.version>
+        <lombok.version>1.18.30</lombok.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -225,14 +226,15 @@
 
             <dependency>
                 <groupId>com.library</groupId>
-                <artifactId>ls-business</artifactId>
+                <artifactId>ls-mapper</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- Lombok -->
             <dependency>
-                <groupId>com.library</groupId>
-                <artifactId>ls-mapper</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
 
         </dependencies>
@@ -246,7 +248,6 @@
         <module>ls-generator</module>
         <module>ls-common</module>
         <module>ls-mapper</module>
-        <module>ls-business</module>
         <module>ls-library</module>
     </modules>
     <packaging>pom</packaging>

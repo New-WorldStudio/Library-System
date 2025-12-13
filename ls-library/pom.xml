@@ -25,11 +25,6 @@
             <groupId>com.library</groupId>
             <artifactId>ls-mapper</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.library</groupId>
-            <artifactId>ls-business</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
