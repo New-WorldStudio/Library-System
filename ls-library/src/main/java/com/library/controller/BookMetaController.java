@@ -3,9 +3,7 @@ package com.library.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.common.enums.BusinessType;
 import com.library.mapper.domain.entity.BookMeta;
-import com.library.service.IBookMetaService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,18 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.library.common.annotation.Log;
 import com.library.common.core.controller.BaseController;
 import com.library.common.core.domain.AjaxResult;
+import com.library.common.enums.BusinessType;
+
+import com.library.service.IBookMetaService;
 import com.library.common.utils.poi.ExcelUtil;
 import com.library.common.core.page.TableDataInfo;
 
 /**
  * 图书元信息
- Controller
- *
+Controller
+ * 
  * @author Echo
  * @date 2025-12-15
  */
 @RestController
-@RequestMapping("/meta/meta")
+@RequestMapping("/books/meta")
 public class BookMetaController extends BaseController
 {
     @Autowired
@@ -38,9 +39,9 @@ public class BookMetaController extends BaseController
 
     /**
      * 查询图书元信息
-     列表
+列表
      */
-    @PreAuthorize("@ss.hasPermi('meta:meta:list')")
+    @PreAuthorize("@ss.hasPermi('books:meta:list')")
     @GetMapping("/list")
     public TableDataInfo list(BookMeta bookMeta)
     {
@@ -51,9 +52,9 @@ public class BookMetaController extends BaseController
 
     /**
      * 导出图书元信息
-     列表
+列表
      */
-    @PreAuthorize("@ss.hasPermi('meta:meta:export')")
+    @PreAuthorize("@ss.hasPermi('books:meta:export')")
     @Log(title = "图书元信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BookMeta bookMeta)
@@ -65,9 +66,9 @@ public class BookMetaController extends BaseController
 
     /**
      * 获取图书元信息
-     详细信息
+详细信息
      */
-    @PreAuthorize("@ss.hasPermi('meta:meta:query')")
+    @PreAuthorize("@ss.hasPermi('books:meta:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -78,7 +79,7 @@ public class BookMetaController extends BaseController
      * 新增图书元信息
 
      */
-    @PreAuthorize("@ss.hasPermi('meta:meta:add')")
+    @PreAuthorize("@ss.hasPermi('books:meta:add')")
     @Log(title = "图书元信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BookMeta bookMeta)
@@ -90,7 +91,7 @@ public class BookMetaController extends BaseController
      * 修改图书元信息
 
      */
-    @PreAuthorize("@ss.hasPermi('meta:meta:edit')")
+    @PreAuthorize("@ss.hasPermi('books:meta:edit')")
     @Log(title = "图书元信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BookMeta bookMeta)
@@ -102,9 +103,9 @@ public class BookMetaController extends BaseController
      * 删除图书元信息
 
      */
-    @PreAuthorize("@ss.hasPermi('meta:meta:remove')")
+    @PreAuthorize("@ss.hasPermi('books:meta:remove')")
     @Log(title = "图书元信息", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{ids}")
+	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(bookMetaService.deleteBookMetaByIds(ids));

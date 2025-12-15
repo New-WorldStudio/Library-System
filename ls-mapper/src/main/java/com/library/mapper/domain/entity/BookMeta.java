@@ -9,8 +9,8 @@ import com.library.common.annotation.Excel;
 
 /**
  * 图书元信息
- 对象 book_meta
- *
+对象 book_meta
+ * 
  * @author Echo
  * @date 2025-12-15
  */
@@ -89,182 +89,182 @@ public class BookMeta extends BaseEntity
     @Excel(name = "介质", readConverterExp = "纸=质、电子书")
     private String medium;
 
-    public void setId(Long id)
+    public void setId(Long id) 
     {
         this.id = id;
     }
 
-    public Long getId()
+    public Long getId() 
     {
         return id;
     }
 
-    public void setBookId(Long bookId)
+    public void setBookId(Long bookId) 
     {
         this.bookId = bookId;
     }
 
-    public Long getBookId()
+    public Long getBookId() 
     {
         return bookId;
     }
 
-    public void setTitle(String title)
+    public void setTitle(String title) 
     {
         this.title = title;
     }
 
-    public String getTitle()
+    public String getTitle() 
     {
         return title;
     }
 
-    public void setSubtitle(String subtitle)
+    public void setSubtitle(String subtitle) 
     {
         this.subtitle = subtitle;
     }
 
-    public String getSubtitle()
+    public String getSubtitle() 
     {
         return subtitle;
     }
 
-    public void setVolumeNumber(String volumeNumber)
+    public void setVolumeNumber(String volumeNumber) 
     {
         this.volumeNumber = volumeNumber;
     }
 
-    public String getVolumeNumber()
+    public String getVolumeNumber() 
     {
         return volumeNumber;
     }
 
-    public void setSeriesName(String seriesName)
+    public void setSeriesName(String seriesName) 
     {
         this.seriesName = seriesName;
     }
 
-    public String getSeriesName()
+    public String getSeriesName() 
     {
         return seriesName;
     }
 
-    public void setParallelBookTitles(String parallelBookTitles)
+    public void setParallelBookTitles(String parallelBookTitles) 
     {
         this.parallelBookTitles = parallelBookTitles;
     }
 
-    public String getParallelBookTitles()
+    public String getParallelBookTitles() 
     {
         return parallelBookTitles;
     }
 
-    public void setAuthor(String author)
+    public void setAuthor(String author) 
     {
         this.author = author;
     }
 
-    public String getAuthor()
+    public String getAuthor() 
     {
         return author;
     }
 
-    public void setTranslator(String translator)
+    public void setTranslator(String translator) 
     {
         this.translator = translator;
     }
 
-    public String getTranslator()
+    public String getTranslator() 
     {
         return translator;
     }
 
-    public void setEditor(String editor)
+    public void setEditor(String editor) 
     {
         this.editor = editor;
     }
 
-    public String getEditor()
+    public String getEditor() 
     {
         return editor;
     }
 
-    public void setSeriesEditor(String seriesEditor)
+    public void setSeriesEditor(String seriesEditor) 
     {
         this.seriesEditor = seriesEditor;
     }
 
-    public String getSeriesEditor()
+    public String getSeriesEditor() 
     {
         return seriesEditor;
     }
 
-    public void setEdition(String edition)
+    public void setEdition(String edition) 
     {
         this.edition = edition;
     }
 
-    public String getEdition()
+    public String getEdition() 
     {
         return edition;
     }
 
-    public void setReleaseRemark(String releaseRemark)
+    public void setReleaseRemark(String releaseRemark) 
     {
         this.releaseRemark = releaseRemark;
     }
 
-    public String getReleaseRemark()
+    public String getReleaseRemark() 
     {
         return releaseRemark;
     }
 
-    public void setPublisher(String publisher)
+    public void setPublisher(String publisher) 
     {
         this.publisher = publisher;
     }
 
-    public String getPublisher()
+    public String getPublisher() 
     {
         return publisher;
     }
 
-    public void setPublicationDate(Date publicationDate)
+    public void setPublicationDate(Date publicationDate) 
     {
         this.publicationDate = publicationDate;
     }
 
-    public Date getPublicationDate()
+    public Date getPublicationDate() 
     {
         return publicationDate;
     }
 
-    public void setClassificationNumber(String classificationNumber)
+    public void setClassificationNumber(String classificationNumber) 
     {
         this.classificationNumber = classificationNumber;
     }
 
-    public String getClassificationNumber()
+    public String getClassificationNumber() 
     {
         return classificationNumber;
     }
 
-    public void setPricing(Long pricing)
+    public void setPricing(Long pricing) 
     {
         this.pricing = pricing;
     }
 
-    public Long getPricing()
+    public Long getPricing() 
     {
         return pricing;
     }
 
-    public void setMedium(String medium)
+    public void setMedium(String medium) 
     {
         this.medium = medium;
     }
 
-    public String getMedium()
+    public String getMedium() 
     {
         return medium;
     }
@@ -272,24 +272,24 @@ public class BookMeta extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("bookId", getBookId())
-                .append("title", getTitle())
-                .append("subtitle", getSubtitle())
-                .append("volumeNumber", getVolumeNumber())
-                .append("seriesName", getSeriesName())
-                .append("parallelBookTitles", getParallelBookTitles())
-                .append("author", getAuthor())
-                .append("translator", getTranslator())
-                .append("editor", getEditor())
-                .append("seriesEditor", getSeriesEditor())
-                .append("edition", getEdition())
-                .append("releaseRemark", getReleaseRemark())
-                .append("publisher", getPublisher())
-                .append("publicationDate", getPublicationDate())
-                .append("classificationNumber", getClassificationNumber())
-                .append("pricing", getPricing())
-                .append("medium", getMedium())
-                .toString();
+            .append("id", getId())
+            .append("bookId", getBookId())
+            .append("title", getTitle())
+            .append("subtitle", getSubtitle())
+            .append("volumeNumber", getVolumeNumber())
+            .append("seriesName", getSeriesName())
+            .append("parallelBookTitles", getParallelBookTitles())
+            .append("author", getAuthor())
+            .append("translator", getTranslator())
+            .append("editor", getEditor())
+            .append("seriesEditor", getSeriesEditor())
+            .append("edition", getEdition())
+            .append("releaseRemark", getReleaseRemark())
+            .append("publisher", getPublisher())
+            .append("publicationDate", getPublicationDate())
+            .append("classificationNumber", getClassificationNumber())
+            .append("pricing", getPricing())
+            .append("medium", getMedium())
+            .toString();
     }
 }
