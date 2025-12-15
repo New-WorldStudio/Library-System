@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.mapper.mapper.BookMetaMapper">
+
+    <resultMap type="BookMeta" id="BookMetaResult">
+        <result property="id"    column="id"    />
+        <result property="bookId"    column="book_id"    />
+        <result property="title"    column="title"    />
+        <result property="subtitle"    column="subtitle"    />
+        <result property="volumeNumber"    column="volume_number"    />
+        <result property="seriesName"    column="series_name"    />
+        <result property="parallelBookTitles"    column="parallel_book_titles"    />
+        <result property="author"    column="author"    />
+        <result property="translator"    column="translator"    />
+        <result property="editor"    column="editor"    />
+        <result property="seriesEditor"    column="series_editor"    />
+        <result property="edition"    column="edition"    />
+        <result property="releaseRemark"    column="release_remark"    />
+        <result property="publisher"    column="publisher"    />
+        <result property="publicationDate"    column="publication_date"    />
+        <result property="classificationNumber"    column="classification_number"    />
+        <result property="pricing"    column="pricing"    />
+        <result property="medium"    column="medium"    />
+    </resultMap>
+
+    <sql id="selectBookMetaVo">
+        select id, book_id, title, subtitle, volume_number, series_name, parallel_book_titles, author, translator, editor, series_editor, edition, release_remark, publisher, publication_date, classification_number, pricing, medium from book_meta
+    </sql>
+
+    <select id="selectBookMetaList" parameterType="BookMeta" resultMap="BookMetaResult">
+        <include refid="selectBookMetaVo"/>
+        <where>
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="subtitle != null  and subtitle != ''"> and subtitle like concat('%', #{subtitle}, '%')</if>
+            <if test="volumeNumber != null  and volumeNumber != ''"> and volume_number = #{volumeNumber}</if>
+            <if test="seriesName != null  and seriesName != ''"> and series_name like concat('%', #{seriesName}, '%')</if>
+            <if test="parallelBookTitles != null  and parallelBookTitles != ''"> and parallel_book_titles = #{parallelBookTitles}</if>
+            <if test="author != null  and author != ''"> and author like concat('%', #{author}, '%')</if>
+            <if test="translator != null  and translator != ''"> and translator = #{translator}</if>
+            <if test="editor != null  and editor != ''"> and editor = #{editor}</if>
+            <if test="seriesEditor != null  and seriesEditor != ''"> and series_editor = #{seriesEditor}</if>
+            <if test="edition != null  and edition != ''"> and edition = #{edition}</if>
+            <if test="releaseRemark != null  and releaseRemark != ''"> and release_remark = #{releaseRemark}</if>
+            <if test="publisher != null  and publisher != ''"> and publisher = #{publisher}</if>
+            <if test="publicationDate != null "> and publication_date = #{publicationDate}</if>
+            <if test="classificationNumber != null  and classificationNumber != ''"> and classification_number = #{classificationNumber}</if>
+            <if test="pricing != null "> and pricing = #{pricing}</if>
+            <if test="medium != null  and medium != ''"> and medium = #{medium}</if>
+        </where>
+    </select>
+
+    <select id="selectBookMetaById" parameterType="Long" resultMap="BookMetaResult">
+        <include refid="selectBookMetaVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBookMeta" parameterType="BookMeta" useGeneratedKeys="true" keyProperty="id">
+        insert into book_meta
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bookId != null">book_id,</if>
+            <if test="title != null">title,</if>
+            <if test="subtitle != null">subtitle,</if>
+            <if test="volumeNumber != null">volume_number,</if>
+            <if test="seriesName != null">series_name,</if>
+            <if test="parallelBookTitles != null">parallel_book_titles,</if>
+            <if test="author != null">author,</if>
+            <if test="translator != null">translator,</if>
+            <if test="editor != null">editor,</if>
+            <if test="seriesEditor != null">series_editor,</if>
+            <if test="edition != null">edition,</if>
+            <if test="releaseRemark != null">release_remark,</if>
+            <if test="publisher != null">publisher,</if>
+            <if test="publicationDate != null">publication_date,</if>
+            <if test="classificationNumber != null">classification_number,</if>
+            <if test="pricing != null">pricing,</if>
+            <if test="medium != null">medium,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bookId != null">#{bookId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="subtitle != null">#{subtitle},</if>
+            <if test="volumeNumber != null">#{volumeNumber},</if>
+            <if test="seriesName != null">#{seriesName},</if>
+            <if test="parallelBookTitles != null">#{parallelBookTitles},</if>
+            <if test="author != null">#{author},</if>
+            <if test="translator != null">#{translator},</if>
+            <if test="editor != null">#{editor},</if>
+            <if test="seriesEditor != null">#{seriesEditor},</if>
+            <if test="edition != null">#{edition},</if>
+            <if test="releaseRemark != null">#{releaseRemark},</if>
+            <if test="publisher != null">#{publisher},</if>
+            <if test="publicationDate != null">#{publicationDate},</if>
+            <if test="classificationNumber != null">#{classificationNumber},</if>
+            <if test="pricing != null">#{pricing},</if>
+            <if test="medium != null">#{medium},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBookMeta" parameterType="BookMeta">
+        update book_meta
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bookId != null">book_id = #{bookId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="subtitle != null">subtitle = #{subtitle},</if>
+            <if test="volumeNumber != null">volume_number = #{volumeNumber},</if>
+            <if test="seriesName != null">series_name = #{seriesName},</if>
+            <if test="parallelBookTitles != null">parallel_book_titles = #{parallelBookTitles},</if>
+            <if test="author != null">author = #{author},</if>
+            <if test="translator != null">translator = #{translator},</if>
+            <if test="editor != null">editor = #{editor},</if>
+            <if test="seriesEditor != null">series_editor = #{seriesEditor},</if>
+            <if test="edition != null">edition = #{edition},</if>
+            <if test="releaseRemark != null">release_remark = #{releaseRemark},</if>
+            <if test="publisher != null">publisher = #{publisher},</if>
+            <if test="publicationDate != null">publication_date = #{publicationDate},</if>
+            <if test="classificationNumber != null">classification_number = #{classificationNumber},</if>
+            <if test="pricing != null">pricing = #{pricing},</if>
+            <if test="medium != null">medium = #{medium},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBookMetaById" parameterType="Long">
+        delete from book_meta where id = #{id}
+    </delete>
+
+    <delete id="deleteBookMetaByIds" parameterType="String">
+        delete from book_meta where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
