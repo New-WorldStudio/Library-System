@@ -1,87 +1,88 @@
 <template>
-  <div class="app-container home">
-     <h1>数据统计看台</h1>
-  </div>
+  <el-card class="app-container home">
+    <h1>数据统计看台</h1>
+    <div ref="main" :style="{width:'600px',height:'400px'}"></div>
+  </el-card>
 </template>
 
 <script>
+import * as echarts from 'echarts';
+
+// 定义 ECharts 配置项
+const options = {
+  title: {
+    text: '测试 - 销量图表',
+    left: 'center'
+  },
+  tooltip: {},
+  xAxis: {
+    data: ['红楼梦', '西游记', '哈利波特', '小夫人', '斗罗大陆', '龙族']
+  },
+  yAxis: {},
+  series: [
+    {
+      name: '销量',
+      type: 'bar',
+      data: [5, 20, 36, 10, 10, 20]
+    }
+  ]
+};
+
 export default {
-  name: "Index",
+  name: 'EchartsOptionAPI',
+  // 1. 使用 data 存储 ECharts 实例
   data() {
     return {
-      // 版本号
-      version: "3.8.9"
+      // 用于存储 ECharts 实例
+      testCharts: null,
     };
   },
+
   methods: {
-    goTarget(href) {
-      window.open(href, "_blank");
+    // 2. 初始化 ECharts 实例的函数
+    initEchart() {
+      // 通过 this.$refs 访问模板中的 DOM 元素
+      const chartDom = this.$refs.main;
+      if (chartDom) {
+        // 初始化图表
+        this.testCharts = echarts.init(chartDom);
+        this.testCharts.setOption(options);
+      }
+    },
+
+    // 3. 窗口尺寸变化时的处理函数
+    handleResize() {
+      // 检查实例是否存在并调用 resize 方法
+      if (this.testCharts) {
+        this.testCharts.resize();
+      }
+    }
+  },
+
+  // 4. 生命周期钩子：组件挂载后执行初始化
+  mounted() {
+    this.initEchart();
+    // 监听窗口变化，确保图表自适应
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  // 5. 生命周期钩子：组件卸载前执行资源清理
+  // Vue 3 使用 beforeUnmount
+  beforeUnmount() {
+    // 移除监听器
+    window.removeEventListener('resize', this.handleResize);
+
+    // 销毁 ECharts 实例，释放资源
+    if (this.testCharts) {
+      this.testCharts.dispose();
+      this.testCharts = null;
     }
   }
 };
 </script>
 
-<style scoped lang="scss">
-.home {
-  blockquote {
-    padding: 10px 20px;
-    margin: 0 0 20px;
-    font-size: 17.5px;
-    border-left: 5px solid #eee;
-  }
-  hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 0;
-    border-top: 1px solid #eee;
-  }
-  .col-item {
-    margin-bottom: 20px;
-  }
-
-  ul {
-    padding: 0;
-    margin: 0;
-  }
-
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  color: #676a6c;
-  overflow-x: hidden;
-
-  ul {
-    list-style-type: none;
-  }
-
-  h4 {
-    margin-top: 0px;
-  }
-
-  h2 {
-    margin-top: 10px;
-    font-size: 26px;
-    font-weight: 100;
-  }
-
-  p {
-    margin-top: 10px;
-
-    b {
-      font-weight: 700;
-    }
-  }
-
-  .update-log {
-    ol {
-      display: block;
-      list-style-type: decimal;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      margin-inline-start: 0;
-      margin-inline-end: 0;
-      padding-inline-start: 40px;
-    }
-  }
+<style scoped>
+h1 {
+  text-align: center;
 }
 </style>
-
