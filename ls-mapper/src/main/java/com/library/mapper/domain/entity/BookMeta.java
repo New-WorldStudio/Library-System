@@ -8,11 +8,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.library.common.annotation.Excel;
 
 /**
- * 图书元信息
-对象 book_meta
+ * 图书详情对象 book_meta
  * 
  * @author Echo
- * @date 2025-12-15
+ * @date 2025-12-23
  */
 public class BookMeta extends BaseEntity
 {

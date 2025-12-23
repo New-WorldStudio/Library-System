@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.mapper.mapper.BookItemMapper">
+    
+    <resultMap type="BookItem" id="BookItemResult">
+        <result property="bookId"    column="book_id"    />
+        <result property="barcode"    column="barcode"    />
+        <result property="status"    column="status"    />
+        <result property="localtion"    column="localtion"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap id="BookItemBookMetaResult" type="BookItem" extends="BookItemResult">
+        <collection property="bookMetaList" ofType="BookMeta" column="book_id" select="selectBookMetaList" />
+    </resultMap>
+
+    <resultMap type="BookMeta" id="BookMetaResult">
+        <result property="id"    column="id"    />
+        <result property="bookId"    column="book_id"    />
+        <result property="title"    column="title"    />
+        <result property="subtitle"    column="subtitle"    />
+        <result property="volumeNumber"    column="volume_number"    />
+        <result property="seriesName"    column="series_name"    />
+        <result property="parallelBookTitles"    column="parallel_book_titles"    />
+        <result property="author"    column="author"    />
+        <result property="translator"    column="translator"    />
+        <result property="editor"    column="editor"    />
+        <result property="seriesEditor"    column="series_editor"    />
+        <result property="edition"    column="edition"    />
+        <result property="releaseRemark"    column="release_remark"    />
+        <result property="publisher"    column="publisher"    />
+        <result property="publicationDate"    column="publication_date"    />
+        <result property="classificationNumber"    column="classification_number"    />
+        <result property="pricing"    column="pricing"    />
+        <result property="medium"    column="medium"    />
+    </resultMap>
+
+    <sql id="selectBookItemVo">
+        select book_id, barcode, status, localtion, create_by, create_time, update_by, update_time, remark from book_item
+    </sql>
+
+    <select id="selectBookItemList" parameterType="BookItem" resultMap="BookItemResult">
+        <include refid="selectBookItemVo"/>
+        <where>  
+            <if test="barcode != null  and barcode != ''"> and barcode = #{barcode}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="localtion != null  and localtion != ''"> and localtion = #{localtion}</if>
+        </where>
+    </select>
+    
+    <select id="selectBookItemByBookId" parameterType="Long" resultMap="BookItemBookMetaResult">
+        select book_id, barcode, status, localtion, create_by, create_time, update_by, update_time, remark
+        from book_item
+        where book_id = #{bookId}
+    </select>
+
+    <select id="selectBookMetaList" resultMap="BookMetaResult">
+        select id, book_id, title, subtitle, volume_number, series_name, parallel_book_titles, author, translator, editor, series_editor, edition, release_remark, publisher, publication_date, classification_number, pricing, medium
+        from book_meta
+        where book_id = #{book_id}
+    </select>
+
+    <insert id="insertBookItem" parameterType="BookItem" useGeneratedKeys="true" keyProperty="bookId">
+        insert into book_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="barcode != null">barcode,</if>
+            <if test="status != null">status,</if>
+            <if test="localtion != null">localtion,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="barcode != null">#{barcode},</if>
+            <if test="status != null">#{status},</if>
+            <if test="localtion != null">#{localtion},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBookItem" parameterType="BookItem">
+        update book_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="barcode != null">barcode = #{barcode},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="localtion != null">localtion = #{localtion},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where book_id = #{bookId}
+    </update>
+
+    <delete id="deleteBookItemByBookId" parameterType="Long">
+        delete from book_item where book_id = #{bookId}
+    </delete>
+
+    <delete id="deleteBookItemByBookIds" parameterType="String">
+        delete from book_item where book_id in 
+        <foreach item="bookId" collection="array" open="(" separator="," close=")">
+            #{bookId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteBookMetaByBookIds" parameterType="String">
+        delete from book_meta where book_id in 
+        <foreach item="bookId" collection="array" open="(" separator="," close=")">
+            #{bookId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteBookMetaByBookId" parameterType="Long">
+        delete from book_meta where book_id = #{bookId}
+    </delete>
+
+    <insert id="batchBookMeta">
+        insert into book_meta( id, book_id, title, subtitle, volume_number, series_name, parallel_book_titles, author, translator, editor, series_editor, edition, release_remark, publisher, publication_date, classification_number, pricing, medium) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.id}, #{item.bookId}, #{item.title}, #{item.subtitle}, #{item.volumeNumber}, #{item.seriesName}, #{item.parallelBookTitles}, #{item.author}, #{item.translator}, #{item.editor}, #{item.seriesEditor}, #{item.edition}, #{item.releaseRemark}, #{item.publisher}, #{item.publicationDate}, #{item.classificationNumber}, #{item.pricing}, #{item.medium})
+        </foreach>
+    </insert>
+</mapper>

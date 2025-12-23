@@ -18,17 +18,15 @@ import com.library.common.annotation.Log;
 import com.library.common.core.controller.BaseController;
 import com.library.common.core.domain.AjaxResult;
 import com.library.common.enums.BusinessType;
-
 import com.library.service.IBookMetaService;
 import com.library.common.utils.poi.ExcelUtil;
 import com.library.common.core.page.TableDataInfo;
 
 /**
- * 图书元信息
-Controller
+ * 图书详情Controller
  * 
  * @author Echo
- * @date 2025-12-15
+ * @date 2025-12-23
  */
 @RestController
 @RequestMapping("/books/meta")
@@ -38,8 +36,7 @@ public class BookMetaController extends BaseController
     private IBookMetaService bookMetaService;
 
     /**
-     * 查询图书元信息
-列表
+     * 查询图书详情列表
      */
     @PreAuthorize("@ss.hasPermi('books:meta:list')")
     @GetMapping("/list")
@@ -51,22 +48,20 @@ public class BookMetaController extends BaseController
     }
 
     /**
-     * 导出图书元信息
-列表
+     * 导出图书详情列表
      */
     @PreAuthorize("@ss.hasPermi('books:meta:export')")
-    @Log(title = "图书元信息", businessType = BusinessType.EXPORT)
+    @Log(title = "图书详情", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BookMeta bookMeta)
     {
         List<BookMeta> list = bookMetaService.selectBookMetaList(bookMeta);
         ExcelUtil<BookMeta> util = new ExcelUtil<BookMeta>(BookMeta.class);
-        util.exportExcel(response, list, "图书元信息数据");
+        util.exportExcel(response, list, "图书详情数据");
     }
 
     /**
-     * 获取图书元信息
-详细信息
+     * 获取图书详情详细信息
      */
     @PreAuthorize("@ss.hasPermi('books:meta:query')")
     @GetMapping(value = "/{id}")
@@ -76,11 +71,10 @@ public class BookMetaController extends BaseController
     }
 
     /**
-     * 新增图书元信息
-
+     * 新增图书详情
      */
     @PreAuthorize("@ss.hasPermi('books:meta:add')")
-    @Log(title = "图书元信息", businessType = BusinessType.INSERT)
+    @Log(title = "图书详情", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BookMeta bookMeta)
     {
@@ -88,11 +82,10 @@ public class BookMetaController extends BaseController
     }
 
     /**
-     * 修改图书元信息
-
+     * 修改图书详情
      */
     @PreAuthorize("@ss.hasPermi('books:meta:edit')")
-    @Log(title = "图书元信息", businessType = BusinessType.UPDATE)
+    @Log(title = "图书详情", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BookMeta bookMeta)
     {
@@ -100,11 +93,10 @@ public class BookMetaController extends BaseController
     }
 
     /**
-     * 删除图书元信息
-
+     * 删除图书详情
      */
     @PreAuthorize("@ss.hasPermi('books:meta:remove')")
-    @Log(title = "图书元信息", businessType = BusinessType.DELETE)
+    @Log(title = "图书详情", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

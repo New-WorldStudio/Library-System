@@ -9,11 +9,10 @@ import org.springframework.stereotype.Service;
 import com.library.service.IBookMetaService;
 
 /**
- * 图书元信息
-Service业务层处理
+ * 图书详情Service业务层处理
  * 
  * @author Echo
- * @date 2025-12-15
+ * @date 2025-12-23
  */
 @Service
 public class BookMetaServiceImpl implements IBookMetaService 
@@ -22,13 +21,10 @@ public class BookMetaServiceImpl implements IBookMetaService
     private BookMetaMapper bookMetaMapper;
 
     /**
-     * 查询图书元信息
-
+     * 查询图书详情
      * 
-     * @param id 图书元信息
-主键
-     * @return 图书元信息
-
+     * @param id 图书详情主键
+     * @return 图书详情
      */
     @Override
     public BookMeta selectBookMetaById(Long id)
@@ -37,13 +33,10 @@ public class BookMetaServiceImpl implements IBookMetaService
     }
 
     /**
-     * 查询图书元信息
-列表
+     * 查询图书详情列表
      * 
-     * @param bookMeta 图书元信息
-
-     * @return 图书元信息
-
+     * @param bookMeta 图书详情
+     * @return 图书详情
      */
     @Override
     public List<BookMeta> selectBookMetaList(BookMeta bookMeta)
@@ -52,11 +45,9 @@ public class BookMetaServiceImpl implements IBookMetaService
     }
 
     /**
-     * 新增图书元信息
-
+     * 新增图书详情
      * 
-     * @param bookMeta 图书元信息
-
+     * @param bookMeta 图书详情
      * @return 结果
      */
     @Override
@@ -66,11 +57,9 @@ public class BookMetaServiceImpl implements IBookMetaService
     }
 
     /**
-     * 修改图书元信息
-
+     * 修改图书详情
      * 
-     * @param bookMeta 图书元信息
-
+     * @param bookMeta 图书详情
      * @return 结果
      */
     @Override
@@ -80,11 +69,9 @@ public class BookMetaServiceImpl implements IBookMetaService
     }
 
     /**
-     * 批量删除图书元信息
-
+     * 批量删除图书详情
      * 
-     * @param ids 需要删除的图书元信息
-主键
+     * @param ids 需要删除的图书详情主键
      * @return 结果
      */
     @Override
@@ -94,11 +81,9 @@ public class BookMetaServiceImpl implements IBookMetaService
     }
 
     /**
-     * 删除图书元信息
-信息
+     * 删除图书详情信息
      * 
-     * @param id 图书元信息
-主键
+     * @param id 图书详情主键
      * @return 结果
      */
     @Override
