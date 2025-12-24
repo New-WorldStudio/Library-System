@@ -2,6 +2,7 @@ package com.library.mapper.mapper;
 
 import com.library.mapper.domain.entity.BookItem;
 import com.library.mapper.domain.entity.BookMeta;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 /**
@@ -10,6 +11,7 @@ import java.util.List;
  * @author Echo
  * @date 2025-12-23
  */
+@Mapper
 public interface BookItemMapper 
 {
     /**
