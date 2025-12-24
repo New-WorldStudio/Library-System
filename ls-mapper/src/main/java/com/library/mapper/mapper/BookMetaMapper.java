@@ -1,6 +1,7 @@
 package com.library.mapper.mapper;
 
 import com.library.mapper.domain.entity.BookMeta;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
