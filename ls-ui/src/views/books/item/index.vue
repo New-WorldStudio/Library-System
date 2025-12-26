@@ -69,13 +69,21 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="图书ID" align="center" prop="bookId" />
       <el-table-column label="图书条形码" align="center" prop="barcode" />
-      <el-table-column label="状态 1可借、2、借出、3损坏，4丢失" align="center" prop="status" />
+      <!-- 1可借、2、借出、3损坏，4丢失 -->
+      <el-table-column label="图书状态 " align="center" prop="status">
+        <template #default="scope">
+          <el-tag :type="getStatusType(scope.row.status)">
+            {{ getStatusLabel(scope.row.status) }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="存放位置" align="center" prop="localtion" />
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['books:item:edit']">修改</el-button>
           <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['books:item:remove']">删除</el-button>
+          <el-button link type="primary" icon="search" @click="handleDetail(scope.row)" >详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -96,6 +104,8 @@
         </el-form-item>
         <el-form-item label="存放位置" prop="localtion">
           <el-input v-model="form.localtion" placeholder="请输入存放位置" />
+        </el-form-item>
+        <el-form-item label="图书状态">
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
@@ -211,7 +221,8 @@
 
 <script setup name="Item">
 import { listItem, getItem, delItem, addItem, updateItem } from "@/api/books/item";
-
+import { useRouter } from 'vue-router'
+ 
 const { proxy } = getCurrentInstance();
 
 const itemList = ref([]);
@@ -225,7 +236,7 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
-
+const router = useRouter()
 const data = reactive({
   form: {},
   queryParams: {
@@ -255,6 +266,31 @@ function getList() {
 function cancel() {
   open.value = false;
   reset();
+}
+// 详情案件操作
+const handleDetail = (row) =>{
+  router.push({ path: '/books/meta', query: { bookId: row.bookId } })
+}
+// 查询状态文字
+const getStatusLabel = (status) =>{
+  const statusMap = {
+    1: '可借',
+    2: '借出',
+    3: '损坏',
+    4: '丢失',
+  }
+  return statusMap[status] || '未知';
+}
+
+// 查询状态对应的颜色类型
+const getStatusType = (status) =>{
+  const typeColor = {
+    1: 'success',
+    2: 'info',
+    3: 'warning',
+    4: 'danger',
+  }
+  return typeColor[status] || '';
 }
 
 // 表单重置
